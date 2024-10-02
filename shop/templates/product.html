@@ -1,0 +1,189 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>جزئیات محصولات</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="static/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href=" {% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css' %}" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body dir="rtl">
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    
+                    <a class="text-dark" href="">راهنمایی</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">پشتیبانی</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+       
+         
+          
+    <!-- Topbar End -->
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+       {{ message }}
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+     </div>
+    {% endfor %}
+      
+    {% endif %}
+    <!-- Navbar Start -->
+   
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="{% url 'home' %}" class="nav-item nav-link">خانه</a>
+                            <a href="{% url 'cart_summery' %}" class="nav-item nav-link">
+                                <i class="bi-cart-fill me-1"></i>
+                                سبد خرید
+
+                                <span class="fa fa-angle-right mr-2"  id="cart_quntity" >{{ cart|length }}</span>
+
+                            </a>
+                            <a href="{% url 'about' %}" class="nav-item nav-link active">درباره ما</a>
+                            <div class="nav-item dropdown">
+                                
+                            </div>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link">تماس با ما</a>
+                        </div>
+                        <div class="navbar-nav ml-auto py-0">
+
+
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}" class="nav-item nav-link">خروج</a> 
+                            {% else %}
+                            <a href="{% url 'login' %}" class="nav-item nav-link">ورود</a> 
+                            <a href="{% url 'signup' %}" class="nav-item nav-link">ثبت نام</a> 
+                            {% endif %}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+
+
+   
+    <div class="card mb-4" style="max-width: 900px;"> 
+        <div class="row g-0"> 
+            <div class="col-md-4"> 
+                <img src="{{ product.picture.url }}" class="img-fluid rounded-start zoom-image" alt="..." onmouseover="showDetails(event)" onmouseout="hideDetails()"> 
+                <div class="image-details" style="display:inline;">
+                    
+                </div>
+            </div> 
+            <div class="col-md-8"  > 
+                <div class="card-body" > 
+                    <h5 class="card-title">{{ product.name }}</h5> 
+
+                    <p>{{ product.descriptions }}</p>
+                    {% if product.is_sale %} 
+                        <p class="card-text"> 💰قیمت:   <strike>{{ product.price | intcomma }} </strike> <br> {{ product.sale_price | intcomma }} </p> 
+                    {% else %} 
+                        <p class="card-text"> 💰قیمت : {{ product.price | intcomma }}</p> 
+                    {% endif %} 
+                    تعداد:
+                    <select class="form-select" id='cart_qty' >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="1">4</option>
+
+                    </select>
+                   <br><br> 
+
+                  
+                   <button class='btn btn-primary' type='button' value='{{ product.id }}' id='add_cart'>اضافه کردن به سبد خرید</button>
+                    <a href="{% url 'home' %}" class="btn btn-primary"> برگردیم خونه </a>
+                
+                </div> 
+            </div> 
+        </div>       
+    </div>
+
+
+    {% include 'base.html' %}
+    <script>
+        $(document).on('click', '#add_cart', function(e) {  
+            e.preventDefault();  
+            $.ajax({  
+                type: 'POST',  
+                url:'{% url "cart_add" %}',
+                data: {  
+                    product_id: $('#add_cart').val(),  
+                    product_qty: $('#cart_qty option:selected').text(), 
+                    csrfmiddlewaretoken:'{{ csrf_token }}',
+                    action: 'post'  
+                },  
+                success: function(json) {  
+                    document.getElementById('cart_quntity').textContent = json.qty;
+                    location.reload();
+ 
+                },
+                error:function (xhr,errmsg,err){
+        
+                    console.log(err)
+                }
+        
+            })
+        })
+        </script>
+   
+
+    
+    
+
+    

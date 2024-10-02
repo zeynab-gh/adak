@@ -1,0 +1,372 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>فروشگاه انلاین آداک</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="static/img/favicon.ico'" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css' %}" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body dir="rtl">
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark" href=""></a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">راهنمایی</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">پشتیبانی</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">A</span>DAK</h1>
+                </a>
+            </div>
+          {% if messages %}
+             {% for message in messages %}
+             <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+             {% endfor %}
+            
+          {% endif %}
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid mb-5" style="text-align: right;">
+        <div class="row border-top px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" href="{% url 'category_summery' %}" style="height: 65px; margin-top: -1px; padding: 0 30px;"> 
+                    <h6 class="m-0" style="text-align: right;">دسته بندی</h6> 
+                    <i class="fa fa-angle-down text-dark"></i> 
+                </a>
+                <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                    <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+                        <div class="nav-item dropdown">
+                            <a href="{% url 'home' %}" class="nav-link" data-toggle="dropdown">همه محصولات<i class="fa fa-angle-down float-right mt-1"></i></a>
+                            
+                               
+ 
+                            </div>
+                              <div>
+                                
+                                <a href="{% url 'category' 'گوشواره' %}" class="nav-item nav-link">گوشواره</a>
+                                <a href="{% url 'category'  'نیم ست' %}" class="nav-item nav-link">نیم ست</a>
+                                <a href="{% url 'category' 'پلاک زنجیر' %}" class="nav-item nav-link">پلاک زنجیر</a>
+                                <a href="{% url 'category' 'انگشتر' %}" class="nav-item nav-link">انگشتر</a>
+                                
+                              </div>
+                        
+                </nav>
+            </div>
+            <div class="col-lg-9"  >
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">A</span>DAK</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse"> 
+                        <div class="navbar-nav py-0"> 
+                            <a href="{% url 'home' %}" class="nav-item nav-link active">خانه</a> 
+                            <a href="{% url 'cart_summery' %}" class="nav-item nav-link">سبد خرید
+                                <span class="fa fa-angle-right mr-2"  id="cart_quntity" >{{ cart|length }} </span>
+                            </a> 
+                            <a href="{% url 'about' %}" class="nav-item nav-link">درباره ما</a> 
+                            <a href="{% url 'contact' %}" class="nav-item nav-link">تماس با ما</a> 
+                        </div> 
+
+                        <div class="navbar-nav ml-auto py-0"> 
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'update_user' %}" class="nav-item nav-link">پروفایل</a> 
+                            <a href="{% url 'logout' %}" class="nav-item nav-link">خروج</a> 
+
+                            {% else %}
+                            <a href="{% url 'login' %}" class="nav-item nav-link">ورود</a> 
+                            <a href="{% url 'signup' %}" class="nav-item nav-link">ثبت نام</a> 
+                            {% endif %}
+
+                            
+                        </div> 
+                    </div> 
+                </nav>
+                <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="height: 410px;">
+                            <img class="img-fluid" src="static/img/2.jpg" alt="Image">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3"></h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4"></h3>
+                                    <br><br><br><br><br><br><br><br><br><br><br><br>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="height: 410px;">
+                            <img class="img-fluid" src="static/img/00.webp" alt="Image">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3"></h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4"></h3>
+                                    <br><br><br><br><br><br><br><br><br><br><br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                            <span class="carousel-control-prev-icon mb-n2"></span>
+                        </div>
+                    </a>
+                    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                            <span class="carousel-control-next-icon mb-n2"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Featured Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0" >محصول با کیفیت</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+                    <h5 class="font-weight-semi-bold m-0">ارسال رایگان</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">بازگشت کالا تا14 روز</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">پشتیبانی24 ساعته</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured End -->
+
+
+    <!-- Categories Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            {% for item in products %}
+           {% if item.is_sale %}
+            <div class="col-lg-4 col-md-6 pb-1">
+                
+
+                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">تخفیف ویژه</a>
+                    <p class="text-right"></p>
+                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src={{ item.picture.url }} alt="">
+                    </a>
+                    <h5 class="font-weight-semi-bold m-0">{{ item.name }}</h5>
+                    <strike>{{ item.price | intcomma }} تومان</strike>
+                    {{ item.sale_price | intcomma }} تومان
+                    <div class="text-center"><a class="btn btn-outline-primary py-md-2 px-md-3" href="{% url 'product' item.id %}"> جزئیات</a>  
+
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-lg-4 col-md-6 pb-1">
+                
+
+                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                    <p class="text-right"></p>
+                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src={{ item.picture.url }} alt="">
+                    </a>
+                    <h5 class="font-weight-semi-bold m-0">{{ item.name }}</h5>
+                   
+                    {{ item.price | intcomma }} نومان 
+                    <div class="text-center"><a class="btn btn-outline-primary py-md-2 px-md-3" href="{% url 'product' item.id %}">جزئیات</a>  
+
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+
+
+
+           
+        
+    <!-- Categories End -->
+
+
+    <!-- Offer Start -->
+    <div class="container-fluid offer pt-5">
+        <div class="row px-xl-5">
+            <div class="col-md-6 pb-4">
+                <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
+                    <img src="static/img/71.webp" alt="">
+                    <div class="position-relative" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">20% تخفیف برای تمامی سفارشات</h5>
+                        <h1 class="mb-4 font-weight-semi-bold">تخفیف بهاره</h1>
+                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">بریم خرید</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pb-4">
+                <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
+                    <img src="static/img/999.jpg" alt="">
+                    <div class="position-relative" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">20% تخفیف برای تمامی سفارشات</h5>
+                        <h1 class="mb-4 font-weight-semi-bold">تخفیف زمستانه</h1>
+                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">بریم خرید</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Offer End -->
+
+
+    <!-- Products Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">محصولات پرفروش</span></h2>
+        </div>
+
+        <div class="container-fluid pt-5">
+            <div class="row px-xl-5 pb-3">
+                {% for item in products %}
+               {% if item.is_sale %}
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">تخفیف ویژه</a>
+    
+                    <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                        <p class="text-right"></p>
+                        <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                            <img class="img-fluid" src={{ item.picture.url }} alt="">
+                        </a>
+                        <h5 class="font-weight-semi-bold m-0">{{ item.name }}</h5>
+                        <strike>{{ item.price | intcomma }} تومان</strike>
+                        {{ item.sale_price | intcomma }} تومان
+                        <div class="text-center"><a class="btn btn-outline-primary py-md-2 px-md-3" href="{% url 'product' item.id %}"> جزئیات</a>  
+    
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+
+
+
+
+
+      
+            
+    <!-- Subscribe End -->
+
+
+   
+                    
+                    
+          
+    <!-- Products End -->
+
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel vendor-carousel">
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-1.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-2.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-3.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-4.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-5.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-6.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-7.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-8.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+    {% include 'base.html' %}
